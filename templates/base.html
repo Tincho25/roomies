@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | Roomies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <h2>Roomies</h2>
+            <a href="#">Iniciar Sesión</a>
+            <a href="index2.html" id="register-button">Registrarse</a>
+        </nav>
+        <div id="hero">
+            <h1>Encuentra tu próximo hogar compartido</h1>
+            <p>Descubre alquileres compartidos con personas de confianza.</p>
+            <a href="#" class="cta-button">Buscar Alquileres</a>
+        </div>
+    </header>
+    <main>
+      <!-- Otras secciones o contenido pueden ir aquí -->
+      {% block cuerpo_index %} {% endblock %}
+    </main>
+  </body>
+</html>
