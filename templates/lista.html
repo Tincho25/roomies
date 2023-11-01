@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Tablas</title>
+</head>
+<body>
+    <h1>Tablas en la base de datos roomies:</h1>
+    <ul>
+        {% for table in tables %}
+            <li>{{ table }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

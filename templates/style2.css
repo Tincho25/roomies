@@ -5,7 +5,7 @@ box-sizing: border-box;
 }
 
 body{
-    background-image: url(fondo2.jpg);
+    background-image: url(https://raw.githubusercontent.com/Tincho25/roomies/main/templates/fondo2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     

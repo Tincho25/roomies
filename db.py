@@ -2,6 +2,12 @@ import mysql.connector
 
 from config import DB_CONFIG
 
+DB_CONFIG ={
+    "user": "root",
+    "password":"2030seconds",
+    "host": "localhost",
+    "database":"roomies"
+}
 
 def get_connection():
     connection = mysql.connector.connect(**DB_CONFIG)
@@ -18,3 +24,6 @@ def get_conn_n_cursor(dictionary=False, named_tuple=False):
         cursor = connection.cursor(named_tuple=True)
 
     return connection, cursor
+
+
+

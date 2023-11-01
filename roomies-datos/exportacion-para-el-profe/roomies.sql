@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `roomies` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `roomies`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: roomies
@@ -26,7 +28,7 @@ CREATE TABLE `busqueda` (
   `ID_busqueda` int(11) NOT NULL AUTO_INCREMENT,
   `criterios` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`ID_busqueda`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +37,6 @@ CREATE TABLE `busqueda` (
 
 LOCK TABLES `busqueda` WRITE;
 /*!40000 ALTER TABLE `busqueda` DISABLE KEYS */;
-INSERT INTO `busqueda` VALUES (1,'Busco compañero de piso tranquilo en zona céntrica'),(2,'Necesito alojamiento para estudiante cerca de la universidad'),(3,'Quiero compartir casa con profesional en área residencial'),(4,'Busco habitación amueblada con baño privado'),(5,'Necesito compañero de piso limpio y ordenado'),(6,'Busco casa compartida con jardín y espacio para mascotas'),(7,'Quiero encontrar un apartamento cerca del transporte público'),(8,'Necesito compañero de piso no fumador'),(9,'Busco habitación en casa familiar con ambiente tranquilo'),(10,'Quiero encontrar alojamiento compartido en zona segura');
 /*!40000 ALTER TABLE `busqueda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -47,17 +48,11 @@ DROP TABLE IF EXISTS `comentario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comentario` (
-  `ID-comentario` int(11) NOT NULL,
-  `contenido` varchar(100) DEFAULT NULL,
-  `calificacion` int(11) DEFAULT NULL,
-  `id-usuario` int(11) NOT NULL,
-  `id-propiedad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID-comentario`),
-  KEY `id-usuario_idx` (`id-usuario`),
-  KEY `id-propiedad_idx` (`id-propiedad`),
-  CONSTRAINT `id-propiedad` FOREIGN KEY (`id-propiedad`) REFERENCES `propiedades` (`ID-propiedades`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id-usuario` FOREIGN KEY (`id-usuario`) REFERENCES `usuarios` (`ID_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
+  `contenido` varchar(255) NOT NULL,
+  `calificacion` int(11) NOT NULL,
+  PRIMARY KEY (`id_comentario`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,12 +72,12 @@ DROP TABLE IF EXISTS `propiedades`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `propiedades` (
-  `ID-propiedades` int(11) NOT NULL,
+  `ID_propiedades` int(11) NOT NULL,
   `ubicacion` varchar(45) DEFAULT NULL,
   `precio` int(11) DEFAULT NULL,
   `tipo de propiedad` char(45) DEFAULT NULL,
   `Caracteristicas` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`ID-propiedades`)
+  PRIMARY KEY (`ID_propiedades`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -105,8 +100,6 @@ DROP TABLE IF EXISTS `reglas`;
 CREATE TABLE `reglas` (
   `ID_reglas` int(11) NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(100) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `id_propiedad` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_reglas`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -117,7 +110,6 @@ CREATE TABLE `reglas` (
 
 LOCK TABLES `reglas` WRITE;
 /*!40000 ALTER TABLE `reglas` DISABLE KEYS */;
-INSERT INTO `reglas` VALUES (1,'No se permiten mascotas',1,1),(2,'Fumar no está permitido',2,2),(3,'Horarios de silencio',3,3),(4,'Limpieza compartida',4,4),(5,'Compartir gastos de servicios',5,5),(6,'Invitados permitidos con restricciones',6,6),(7,'Respeto a la privacidad',7,7),(8,'Acceso a áreas comunes',8,8),(9,'Pago puntual del alquiler',9,9),(10,'Acuerdo de convivencia',10,10),(11,'No se permiten mascotas',1,1),(12,'Fumar no está permitido',2,2),(13,'Horarios de silencio',3,3),(14,'Limpieza compartida',4,4),(15,'Compartir gastos de servicios',5,5),(16,'Invitados permitidos con restricciones',6,6),(17,'Respeto a la privacidad',7,7),(18,'Acceso a áreas comunes',8,8),(19,'Pago puntual del alquiler',9,9),(20,'Acuerdo de convivencia',10,10),(21,'No se permiten mascotas',1,1),(22,'Fumar no está permitido',2,2),(23,'Horarios de silencio',3,3),(24,'Limpieza compartida',4,4),(25,'Compartir gastos de servicios',5,5),(26,'Invitados permitidos con restricciones',6,6),(27,'Respeto a la privacidad',7,7),(28,'Acceso a áreas comunes',8,8),(29,'Pago puntual del alquiler',9,9),(30,'Acuerdo de convivencia',10,10);
 /*!40000 ALTER TABLE `reglas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,14 +127,11 @@ CREATE TABLE `usuarios` (
   `edad` int(11) NOT NULL,
   `ocupacion` varchar(45) NOT NULL,
   `contraseña` varchar(45) NOT NULL,
-  `estilo-de-vida` varchar(300) NOT NULL,
-  `busqueda_ID_busqueda` int(11) NOT NULL,
+  `estilo_de_vida` varchar(300) NOT NULL,
   `tipo` int(11) NOT NULL,
   PRIMARY KEY (`ID_usuario`),
-  UNIQUE KEY `nombre_UNIQUE` (`nombre`),
-  KEY `fk_usuarios_busqueda_idx` (`busqueda_ID_busqueda`),
-  CONSTRAINT `fk_usuarios_busqueda` FOREIGN KEY (`busqueda_ID_busqueda`) REFERENCES `busqueda` (`ID_busqueda`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,6 +140,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Juan Pérez','juan@gmail.com',30,'Ingeniero','clave123','Activo',1),(2,'Ana Rodríguez','ana@gmail.com',25,'Diseñador','abcd456','Activo',1),(3,'Luis González','luis@gmail.com',28,'Médico','12345678','Sedentario',2),(4,'María López','maria@gmail.com',35,'Profesor','miclave','Activo',1),(5,'Carla Sánchez','carla@gmail.com',40,'Abogado','password123','Sedentario',2),(6,'Pedro Ramirez','pedro@gmail.com',22,'Estudiante','contraseña','Activo',1),(7,'Sofía Martínez','sofia@gmail.com',29,'Chef','clave1234','Activo',1),(8,'Javier Torres','javier@gmail.com',32,'Ingeniero','abcd1234','Activo',1),(9,'Laura García','laura@gmail.com',27,'Médico','password','Sedentario',2),(10,'Pablo Fernández','pablo@gmail.com',31,'Arquitecto','contrasena','Activo',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +153,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-11 10:26:14
+-- Dump completed on 2023-11-01  0:03:42

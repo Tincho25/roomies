@@ -7,6 +7,7 @@ app = Wsgiclass()
 
 @app.ruta("/")
 def home_page(request, response):
+    conexion,cursor=get_conn_n_cursor(dictionary=True)
     html_respuesta = render_template("index.html")
     response.text = html_respuesta["text"]
     response.content_type = html_respuesta["type"]
@@ -47,3 +48,5 @@ def register(request: Request, response: Response):
     html_respuesta = render_template(register_template)
     response.text = html_respuesta["text"]
     response.content_type = html_respuesta["type"]
+    
+    
